@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Care Plus Performance & %ART — Area South</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+<style>
+:root{
+  --green:#0A5C36; --green-2:#1E8C5A; --lime:#8DC63F; --mist:#EEF5E6; --sage:#C9DDB8;
+  --ink:#1F2A24; --muted:#5B6B63; --line:#D5DED8; --zebra:#F4F8F0; --bg:#FFFFFF; --warn:#9A5B00; --warn-bg:#FFF4DC;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans Thai",Tahoma,"Leelawadee UI",sans-serif;font-size:15px;line-height:1.5}
+header.top{background:var(--green);color:#fff;padding:28px 20px 30px}
+.wrap{max-width:980px;margin:0 auto}
+h1{margin:0;font-size:clamp(24px,4vw,34px);font-weight:700;letter-spacing:-.01em}
+.sub{margin:4px 0 0;color:var(--sage)}
+main{padding:24px 20px 60px}
+.drop{display:block;border:2px dashed var(--sage);border-radius:14px;padding:28px 20px;text-align:center;background:var(--mist);cursor:pointer;transition:border-color .15s,background .15s}
+.drop:hover,.drop.over{border-color:var(--green-2);background:#E3F0D6}
+.drop:focus-visible{outline:3px solid var(--lime);outline-offset:3px}
+.drop strong{display:block;font-size:17px;color:var(--green)}
+.drop span{color:var(--muted);font-size:14px}
+.locs{margin:14px 0 14px;color:var(--muted);font-size:13px}
+.bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin:26px 0 8px}
+.bar .meta{color:var(--muted);font-size:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+select{font:inherit;font-size:14px;padding:7px 10px;border:1.5px solid var(--sage);border-radius:8px;background:#fff;color:var(--ink)}
+select:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+button{font:inherit;border:0;border-radius:10px;padding:11px 18px;font-weight:600;cursor:pointer}
+button:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+.btn-main{background:var(--green);color:#fff}
+.btn-main:hover{background:#084a2c}
+.btn-ghost{background:transparent;color:var(--green);border:1.5px solid var(--sage)}
+.btn-ghost:hover{background:var(--mist)}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.notice{background:var(--warn-bg);color:var(--warn);border-radius:10px;padding:10px 14px;font-size:14px;margin:12px 0 0}
+.error{background:#FDE8E8;color:#9B1C1C;border-radius:10px;padding:10px 14px;margin:14px 0 0}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:14px 0 6px}
+.kpi{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.kpi .l{color:var(--muted);font-size:13px}
+.kpi .v{font-size:28px;font-weight:700;color:var(--green);line-height:1.2;font-variant-numeric:tabular-nums}
+.kpi .s{color:var(--muted);font-size:12.5px}
+.kpi.free .v{color:var(--green-2)}
+h2{font-size:20px;color:var(--green);margin:30px 0 10px}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{padding:7px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-weight:600;text-align:center}
+thead tr:first-child th{color:#fff}
+th.g{background:var(--green);color:#fff}
+th.f{background:var(--lime);color:var(--ink)!important}
+th.y{background:var(--green-2);color:#fff}
+th.f2{background:var(--sage);color:var(--ink)}
+th.left{text-align:left}
+td.n{text-align:right}
+td.c{text-align:center;color:var(--muted)}
+td.b{font-weight:600}
+td.z{color:#9AA59F}
+tbody tr:nth-child(even) td{background:var(--zebra)}
+tfoot td{background:var(--mist);font-weight:700}
+.foot{color:var(--muted);font-size:13px;margin-top:18px}
+.more{margin-top:10px;font-size:14px;padding:8px 14px}
+tr.oth td{font-style:italic;color:var(--muted)}
+[hidden]{display:none!important}
+@media (max-width:700px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+.tabs{display:flex;gap:6px;margin-top:22px;flex-wrap:wrap}
+.tabs button{background:rgba(255,255,255,.12);color:#fff;border-radius:10px 10px 0 0;padding:10px 18px;font-weight:600}
+.tabs button[aria-selected=true]{background:#fff;color:var(--green)}
+header.top{padding-bottom:0}
+.drops2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--mist);border:1px solid var(--sage);border-radius:999px;padding:4px 6px 4px 12px;font-size:13px}
+.chip small{color:var(--muted)}
+.chip.bad{background:#FDE2E1;border-color:#F5B5B0}
+.chip button{background:transparent;color:var(--muted);padding:0 8px;font-size:16px;line-height:1;border-radius:999px}
+.chip button:hover{background:#fff;color:#B42318}
+th.d{background:#3D4A43;color:#fff}
+th.d2{background:#5B6B63;color:#fff}
+td.dm{color:#3D4A43}
+td.red{background:#FDE2E1!important;color:#B42318}
+td.ok{color:var(--green)}
+td.gap{color:#B42318;font-weight:600}
+.kpi.bad .v{color:#B42318}
+.h2row{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px}
+.chk{font-size:14px;color:var(--muted);display:inline-flex;gap:6px;align-items:center;cursor:pointer}
+.redtag{background:#FDE2E1;color:#B42318;padding:0 6px;border-radius:4px;font-weight:600}
+input[type=number]{font:inherit;font-size:14px;width:72px;padding:7px 8px;border:1.5px solid var(--sage);border-radius:8px}
+input[type=number]:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+@media (max-width:700px){.drops2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <h1>Care Plus Performance</h1>
+  <p class="sub">AIS Shop Area South · Import Excel / CSV → Export PowerPoint / Excel (ข้อมูลไม่ถูกเก็บ รีเฟรชแล้วหาย)</p>
+  <nav class="tabs" role="tablist">
+    <button role="tab" id="tab-cp-btn" aria-controls="tab-cp" aria-selected="true" type="button">Care Plus Performance</button>
+    <button role="tab" id="tab-art-btn" aria-controls="tab-art" aria-selected="false" type="button">%ART Care Plus vs Device</button>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <p class="locs" id="locList"></p>
+  <div id="err" class="error" hidden></div>
+
+  <!-- ===== TAB 1: Care Plus ===== -->
+  <section id="tab-cp" role="tabpanel" aria-labelledby="tab-cp-btn">
+    <label class="drop" data-kind="cp" tabindex="0">
+      <strong>เลือกไฟล์ Care Plus (Excel หรือ CSV)</strong>
+      <span>Excel รายวัน หรือ CSV รายเดือน AIS_Care_Plus_AIS_Shop_YYYYMM.csv · เลือกได้หลายไฟล์ (เช่น CSV 01–07 + Excel 08)</span>
+      <input type="file" accept=".xlsx,.xls,.csv" multiple hidden>
+    </label>
+    <div class="chips" data-chips="cp"></div>
+
+    <section id="result" hidden>
+      <div class="bar">
+        <div class="meta"><label for="dateSel">วันที่</label> <select id="dateSel"></select> <span id="meta"></span></div>
+        <div class="actions">
+          <button class="btn-ghost" id="btnClear" type="button">ล้างข้อมูล</button>
+          <button class="btn-ghost" id="btnXlsx" type="button">Export Excel</button>
+          <button class="btn-main" id="btnExport" type="button">Export PowerPoint</button>
+        </div>
+      </div>
+      <div id="warn" class="notice" hidden></div>
+      <div class="kpis" id="kpis"></div>
+      <h2>By Location</h2>
+      <div class="tbl"><table id="tLoc"></table></div>
+      <div id="secBrand"><h2>By Brand</h2>
+      <div class="tbl"><table id="tBrand"></table></div></div>
+      <div id="secModel"><h2 id="hModel">By Model</h2>
+      <div class="tbl"><table id="tModel"></table></div>
+      <button class="btn-ghost more" id="btnMore" type="button" hidden></button></div>
+      <h2>By Staff</h2>
+      <div class="tbl"><table id="tStaff"></table></div>
+      <p class="foot">Rev.: Free = ค่าบริการรายเดือนหลัง Free1M, 12M = ราคารายปี (ดึงจาก Product Name) · Brand/Model เรียงตาม Qty · By Brand แสดงเฉพาะเว็บและ Excel</p>
+    </section>
+  </section>
+
+  <!-- ===== TAB 2: %ART ===== -->
+  <section id="tab-art" role="tabpanel" aria-labelledby="tab-art-btn" hidden>
+    <div class="drops2">
+      <div>
+        <label class="drop" data-kind="cp" tabindex="0">
+          <strong>1. ไฟล์ Care Plus</strong>
+          <span>Excel รายวัน / CSV รายเดือน · หลายไฟล์ได้ (ใช้ร่วมกับแท็บแรก)</span>
+          <input type="file" accept=".xlsx,.xls,.csv" multiple hidden>
+        </label>
+        <div class="chips" data-chips="cp"></div>
+      </div>
+      <div>
+        <label class="drop" data-kind="dv" tabindex="0">
+          <strong>2. ไฟล์ Device Sale</strong>
+          <span>ROS_Sale_By_Shop_*.xlsx · Sheet Data_Sale · PRODUCT TYPE = DEVICE (ไม่นับ BROVI, HONGKONGBOOST, TOZED, VPLUS)</span>
+          <input type="file" accept=".xlsx,.xls" hidden>
+        </label>
+        <div class="chips" data-chips="dv"></div>
+      </div>
+    </div>
+
+    <section id="artResult" hidden>
+      <div class="bar">
+        <div class="meta">
+          <label for="artDate">วันที่</label> <select id="artDate"></select>
+          <label for="artTarget">เกณฑ์สีแดง %ART ต่ำกว่า</label>
+          <input id="artTarget" type="number" min="0" max="200" step="1" inputmode="decimal"> %
+          <span id="artTargetHint"></span>
+        </div>
+        <div class="actions">
+          <button class="btn-ghost" id="btnArtXlsx" type="button">Export Excel</button>
+          <button class="btn-main" id="btnArtPptx" type="button">Export PowerPoint</button>
+        </div>
+      </div>
+      <div id="artWarn" class="notice" hidden></div>
+      <div class="kpis" id="artKpis"></div>
+      <h2>By Location</h2>
+      <div class="tbl"><table id="aLoc"></table></div>
+      <h2>By Brand</h2>
+      <div class="tbl"><table id="aBrand"></table></div>
+      <h2 id="aHModel">By Model</h2>
+      <div class="tbl"><table id="aModel"></table></div>
+      <button class="btn-ghost more" id="aMore" type="button" hidden></button>
+      <div class="h2row"><h2>Staff Performance — Care Plus vs Device</h2>
+        <label class="chk"><input type="checkbox" id="aFocus"> แสดงเฉพาะที่ต้อง Focus</label></div>
+      <div class="tbl"><table id="aStaff"></table></div>
+      <p class="foot">%ART = Care Plus Orders ÷ Device Units · <span class="redtag">พื้นแดง</span> = %ART ต่ำกว่าเกณฑ์ (ต้อง Focus) · Gap = จำนวน Care Plus ที่ต้องทำเพิ่มเพื่อถึงเกณฑ์ · By Brand แสดงเฉพาะเว็บและ Excel</p>
+    </section>
+  </section>
+</main>
+
+<script>
+/* ===== CORE (no DOM) ===== */
+const LOCATIONS = {
+  '1204': { name: 'Shop Central Surat Thani', short: 'Surat Thani' },
+  '1205': { name: 'Shop Central Hat Yai', short: 'Central Hat Yai' },
+  '1213': { name: 'Shop Central Phuket Floresta', short: 'Phuket Floresta' },
+  '1215': { name: 'Shop Central Nakhon Si Thammarat', short: 'Nakhon Si Thammarat' },
+  '1216': { name: 'Shop Central Samui', short: 'Samui' },
+  '1245': { name: 'Shop Serenade Club Central Festival Hat Yai', short: 'Serenade Festival Hat Yai' },
+  '1252': { name: 'Shop Hatyai Village', short: 'Hatyai Village' },
+  '1255': { name: 'Shop Central Phuket Festival', short: 'Phuket Festival' },
+  '1259': { name: 'AIS SHOP Robinson Trang', short: 'Robinson Trang' }
+};
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const fmt = n => Number(n).toLocaleString('en-US');
+
+function parseProduct(name) {
+  const p = String(name || '');
+  let m = p.match(/Free\s*1M\s*(\d[\d,]*)/i);
+  if (m) return { term: 'Free', price: +m[1].replace(/,/g, '') };
+  if (/12\s*M(onths)?\b/i.test(p)) {
+    m = p.match(/(\d[\d,]{2,})\s*B/i);
+    if (m) return { term: '12M', price: +m[1].replace(/,/g, '') };
+  }
+  if (/Monthly/i.test(p)) {            // e.g. "Care Plus with Samsung Care 299B Monthly" → counted as Free (monthly)
+    m = p.match(/(\d[\d,]*)\s*B/i);
+    if (m) return { term: 'Free', price: +m[1].replace(/,/g, '') };
+  }
+  return null;
+}
+
+// Normalise to {d,m,y}; source files use dd/mm/yyyy
+function parseDate(v) {
+  const fixY = y => (y < 100 ? y + 2000 : y > 2400 ? y - 543 : y);           // 26 → 2026, 2569 (พ.ศ.) → 2026
+  if (v instanceof Date && !isNaN(v)) return { d: v.getDate(), m: v.getMonth() + 1, y: fixY(v.getFullYear()) };
+  if (typeof v === 'number' && typeof XLSX !== 'undefined') { const o = XLSX.SSF.parse_date_code(v); if (o && o.y > 1990) return { d: o.d, m: o.m, y: fixY(o.y) }; }
+  const t = String(v || '').trim();
+  let m = t.match(/^(\d{4})[\/\-.](\d{1,2})[\/\-.](\d{1,2})/);                  // 2026-10-03
+  if (m) return { d: +m[3], m: +m[2], y: fixY(+m[1]) };
+  m = t.match(/^(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{2,4})/);                   // 03/10/2026 (dd/mm) or 10/13/2026 (mm/dd)
+  if (m) { let d = +m[1], mo = +m[2]; if (mo > 12 && d <= 12) [d, mo] = [mo, d]; return mo >= 1 && mo <= 12 ? { d, m: mo, y: fixY(+m[3]) } : null; }
+  if (/^\d{5}(\.\d+)?$/.test(t) && typeof XLSX !== 'undefined') { const o = XLSX.SSF.parse_date_code(+t); if (o) return { d: o.d, m: o.m, y: fixY(o.y) }; }
+  return null;
+}
+// Files re-saved in Excel (US locale) can come back as mm/dd. If every day ≤ 12 and swapping day/month
+// gives a tighter set of months closer to today, swap the whole file.
+function fixDateOrder(recs) {
+  const ds = recs.filter(x => x.d).map(x => x.d);
+  if (!ds.length || ds.some(d => d.d > 12)) return false;
+  const now = new Date(), today = now.getFullYear() * 12 + now.getMonth();
+  const score = arr => {
+    const months = new Set(arr.map(d => d.y * 12 + d.m - 1));
+    const dist = Math.min(...[...months].map(k => Math.abs(today - k) + (k > today ? 6 : 0)));
+    return months.size * 100 + dist;
+  };
+  const sw = ds.map(d => ({ d: d.m, m: d.d, y: d.y }));
+  if (score(sw) >= score(ds)) return false;
+  recs.forEach(x => { if (x.d) { x.d = { d: x.d.m, m: x.d.d, y: x.d.y }; x.dk = dKey(x.d); } });
+  return true;
+}
+const dKey = o => o.y * 10000 + o.m * 100 + o.d;
+const dTxt = o => String(o.d).padStart(2, '0') + ' ' + MONTHS[o.m - 1] + ' ' + o.y;
+function dateLabel(dates) {
+  if (!dates.length) return '-';
+  dates.sort((a, b) => dKey(a) - dKey(b));
+  const a = dates[0], b = dates[dates.length - 1];
+  if (dKey(a) === dKey(b)) return dTxt(a);
+  if (a.m === b.m && a.y === b.y) return String(a.d).padStart(2, '0') + '–' + dTxt(b);
+  return dTxt(a) + ' – ' + dTxt(b);
+}
+function fileDate(dates) {
+  if (!dates.length) return 'NoDate';
+  const b = dates[dates.length - 1];
+  return String(b.d).padStart(2, '0') + MONTHS[b.m - 1] + b.y;
+}
+
+// Step 1: rows (array of arrays) → normalised records. Supports
+//   (A) Daily Excel: Product Name / Location Code / Username / Order Date
+//   (B) Monthly CSV:  order_promotion_name / location_cd / emp_login / order_completed_dt / order_num
+function parseRows(rows) {
+  const norm = s => String(s == null ? '' : s).replace(/^\uFEFF/, '').trim().toLowerCase().replace(/\s+/g, ' ');
+  const PROD = ['product name', 'order_promotion_name'];
+  let hi = -1;
+  for (let i = 0; i < Math.min(rows.length, 20); i++) if ((rows[i] || []).some(c => PROD.includes(norm(c)))) { hi = i; break; }
+  if (hi < 0) throw new Error('ไม่พบคอลัมน์ "Product Name" หรือ "order_promotion_name" — ตรวจสอบว่าเป็นไฟล์ Care Plus ที่ถูกต้อง');
+  const H = rows[hi].map(norm);
+  const col = (...names) => { for (const n of names) { const i = H.indexOf(n); if (i >= 0) return i; } return -1; };
+  const cP = col(...PROD), cL = col('location code', 'location_cd'), cU = col('username', 'emp_login', 'user name'),
+        cD = col('order date', 'order_completed_dt', 'trade_date'), cO = col('order_num', 'order number', 'order no'),
+        cB = col('handset brand', 'order_brand', 'brand'), cM = col('handset model', 'order_model', 'model');
+  const miss = [['Location Code / location_cd', cL], ['Username / emp_login', cU]].filter(x => x[1] < 0).map(x => x[0]);
+  if (miss.length) throw new Error('ไม่พบคอลัมน์: ' + miss.join(', '));
+  const format = H.includes('order_promotion_name') ? 'CSV รายเดือน (MTD)' : 'Excel รายวัน';
+  const recs = []; const seen = new Set();
+  let total = 0, outside = 0, dup = 0; const unknown = {};
+  for (let i = hi + 1; i < rows.length; i++) {
+    const r = rows[i]; if (!r || r.every(c => c === '' || c == null)) continue;
+    total++;
+    const code = String(r[cL] == null ? '' : r[cL]).trim().replace(/\.0+$/, '');
+    if (!LOCATIONS[code]) { outside++; continue; }
+    if (cO >= 0) { const on = String(r[cO] || '').trim(); if (on) { if (seen.has(on)) { dup++; continue; } seen.add(on); } }
+    const pr = parseProduct(r[cP]);
+    if (!pr) { const k = String(r[cP] || '(ว่าง)'); unknown[k] = (unknown[k] || 0) + 1; continue; }
+    const d = cD >= 0 ? parseDate(r[cD]) : null;
+    const brand = cB >= 0 ? (String(r[cB] || '').trim().toUpperCase() || '(ไม่ระบุ)') : '';
+    const model = cM >= 0 ? (String(r[cM] || '').trim().toUpperCase() || '(ไม่ระบุ)') : '';
+    recs.push({ code, product: String(r[cP] || '').trim(), term: pr.term, price: pr.price, user: String(r[cU] || '(ไม่ระบุ)').trim().toUpperCase(), brand, model, d, dk: d ? dKey(d) : 0 });
+  }
+  const swapped = fixDateOrder(recs);
+  const noDate = recs.filter(x => !x.d).length, sample = cD >= 0 ? String(rows[hi + 1] ? rows[hi + 1][cD] : '') : '';
+  const dmap = {}; recs.forEach(x => { if (x.d) dmap[x.dk] = x.d; });
+  const dates = Object.keys(dmap).map(Number).sort((a, b) => a - b).map(k => dmap[k]);
+  return { recs, dates, format, total, outside, dup, unknown, hasBrand: cB >= 0, hasModel: cM >= 0, swapped, noDate, sample, dateCol: cD >= 0 ? rows[hi][cD] : '' };
+}
+
+// Step 2: aggregate records for a date key (0 = all dates)
+function aggregate(P, dk) {
+  const recs = dk ? P.recs.filter(x => x.dk === dk) : P.recs;
+  const loc = {}; Object.keys(LOCATIONS).forEach(k => loc[k] = { code: k, loc: LOCATIONS[k].short, fq: 0, fr: 0, yq: 0, yr: 0 });
+  const staff = {}, brand = {}, model = {};
+  for (const x of recs) {
+    const sk = x.user + '|' + x.code;
+    const s = staff[sk] || (staff[sk] = { Username: x.user, code: x.code, loc: LOCATIONS[x.code].short, fq: 0, fr: 0, yq: 0, yr: 0 });
+    const tgt = [loc[x.code], s];
+    if (P.hasBrand) tgt.push(brand[x.brand] || (brand[x.brand] = { brand: x.brand, fq: 0, fr: 0, yq: 0, yr: 0 }));
+    if (P.hasModel) { const mk = x.brand + '|' + x.model; tgt.push(model[mk] || (model[mk] = { brand: x.brand, model: x.model, fq: 0, fr: 0, yq: 0, yr: 0 })); }
+    for (const o of tgt) { if (x.term === 'Free') { o.fq++; o.fr += x.price; } else { o.yq++; o.yr += x.price; } }
+  }
+  const fin = o => { o.tq = o.fq + o.yq; o.tr = o.fr + o.yr; return o; };
+  const L = Object.values(loc).map(fin).sort((a, b) => b.tr - a.tr || b.tq - a.tq || a.loc.localeCompare(b.loc));
+  const S = Object.values(staff).map(fin).sort((a, b) => b.tr - a.tr || b.tq - a.tq || a.Username.localeCompare(b.Username));
+  const byQty = (a, b) => b.tq - a.tq || b.tr - a.tr;
+  const B = Object.values(brand).map(fin).sort((a, b) => byQty(a, b) || a.brand.localeCompare(b.brand));
+  const M = Object.values(model).map(fin).sort((a, b) => byQty(a, b) || a.model.localeCompare(b.model));
+  const T = fin(['fq', 'fr', 'yq', 'yr'].reduce((t, k) => (t[k] = L.reduce((a, r) => a + r[k], 0), t), {}));
+  const ds = dk ? P.dates.filter(d => dKey(d) === dk) : P.dates.slice();
+  const fd = ds.length ? fileDate(ds) : 'NoDate';
+  return { recs, loc: L, staff: S, brand: B, model: M, hasBrand: P.hasBrand, hasModel: P.hasModel, T, dateLabel: dateLabel(ds), fileDate: dk || ds.length < 2 ? fd : fileDate(ds.slice(0,1)).slice(0,2) + '-' + fd, mtd: !dk && ds.length > 1 };
+}
+
+// convenience (single shot, all dates)
+function analyse(rows) { const P = parseRows(rows); return Object.assign(aggregate(P, 0), P); }
+
+const MODEL_TOP = 20;
+// Top-N models + one "Others" row so long MTD files stay readable
+function topModels(M, n) {
+  if (M.length <= n) return { rows: M, other: null };
+  const rest = M.slice(n), other = { brand: '', model: 'Others (' + rest.length + ' models)', fq: 0, fr: 0, yq: 0, yr: 0 };
+  rest.forEach(r => ['fq', 'fr', 'yq', 'yr'].forEach(k => other[k] += r[k]));
+  other.tq = other.fq + other.yq; other.tr = other.fr + other.yr;
+  return { rows: M.slice(0, n), other };
+}
+
+function buildPptx(D) {
+  const RH_L = 0.3, RH_S = 0.25;
+  const TM = D.hasModel ? topModels(D.model, MODEL_TOP) : null;
+  const PPT_BRAND = false;   // By Brand: Excel only (ไม่แสดงใน PowerPoint)
+  const nB = PPT_BRAND && D.hasBrand ? Math.max(D.brand.length, 1) + 3 : 0, nM = TM ? Math.max(TM.rows.length, 1) + 2 + (TM.other ? 1 : 0) : 0;
+  const H = 0.4 + 0.9 + 0.3 + 1.3 + 0.45 + 0.5 + RH_L * (D.loc.length + 3) + 0.45
+    + (nB ? 0.5 + RH_L * nB + 0.45 : 0) + (nM ? 0.5 + RH_S * nM + 0.45 : 0)
+    + 0.5 + RH_S * (Math.max(D.staff.length, 1) + 2) + 0.6;
+  const pres = new PptxGenJS();
+  pres.defineLayout({ name: 'LONG', width: 10, height: Math.min(56, Math.ceil(H * 10) / 10) }); pres.layout = 'LONG';
+  pres.theme = { headFontFace: 'Arial', bodyFontFace: 'Arial' };
+  pres.title = 'Care Plus ' + (D.mtd ? 'MTD' : 'Daily') + ' Performance ' + D.dateLabel;
+  const G = '0A5C36', G2 = '1E8C5A', LIME = '8DC63F', SAGE = 'C9DDB8', MIST = 'EEF5E6', INK = '1F2A24', MUTED = '5B6B63', T = D.T;
+  const s = pres.addSlide(); s.background = { color: 'FFFFFF' };
+  s.addShape(pres.shapes.RECTANGLE, { x: 0, y: 0, w: 10, h: 3.0, fill: { color: G }, line: { type: 'none' }, objectName: 'Header' });
+  s.addText('Care Plus ' + (D.mtd ? 'MTD' : 'Daily') + ' Performance', { x: 0.5, y: 0.35, w: 9, h: 0.6, fontSize: 30, bold: true, color: 'FFFFFF', margin: 0, isTextBox: true });
+  s.addText('AIS Shop Area South  •  ' + (D.mtd ? 'MTD ' : 'Order Date ') + D.dateLabel, { x: 0.5, y: 0.95, w: 9, h: 0.35, fontSize: 14, color: SAGE, margin: 0, isTextBox: true });
+  const active = D.loc.filter(r => r.tq > 0).length;
+  [{ lbl: 'Total Orders', v: fmt(T.tq), sub: active + ' locations • ' + D.staff.length + ' staff' },
+   { lbl: 'Total Rev. (THB)', v: fmt(T.tr), sub: 'Free + 12M' },
+   { lbl: 'Free (Monthly)', v: fmt(T.fq), sub: 'Rev. ' + fmt(T.fr) + ' THB', c: G2 },
+   { lbl: '12M (Yearly)', v: fmt(T.yq), sub: 'Rev. ' + fmt(T.yr) + ' THB' }].forEach((c, i) => {
+    const x = 0.5 + i * 2.3, y = 1.5;
+    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y, w: 2.05, h: 1.25, rectRadius: 0.08, fill: { color: 'FFFFFF' }, line: { type: 'none' }, objectName: 'KPI ' + c.lbl });
+    s.addText(c.lbl, { x: x + 0.18, y: y + 0.12, w: 1.75, h: 0.28, fontSize: 12, color: MUTED, margin: 0, isTextBox: true });
+    s.addText(c.v, { x: x + 0.18, y: y + 0.4, w: 1.75, h: 0.5, fontSize: 28, bold: true, color: c.c || G, margin: 0, fit: 'shrink', isTextBox: true });
+    s.addText(c.sub, { x: x + 0.18, y: y + 0.9, w: 1.8, h: 0.25, fontSize: 11, color: MUTED, margin: 0, isTextBox: true });
+  });
+  const hdr = (t, fill, col) => ({ text: t, options: { bold: true, color: col || 'FFFFFF', fill: { color: fill }, align: 'center', valign: 'middle' } });
+  const headerRows = first => {
+    const r1 = first.map(t => ({ text: t, options: { bold: true, color: 'FFFFFF', fill: { color: G }, valign: 'middle', rowspan: 2, align: t === '#' ? 'center' : 'left' } }));
+    r1.push({ text: 'Free (Monthly)', options: { bold: true, color: INK, fill: { color: LIME }, align: 'center', colspan: 2 } });
+    r1.push({ text: '12M (Yearly)', options: { bold: true, color: 'FFFFFF', fill: { color: G2 }, align: 'center', colspan: 2 } });
+    r1.push({ text: 'Total', options: { bold: true, color: 'FFFFFF', fill: { color: G }, align: 'center', colspan: 2 } });
+    return [r1, [hdr('Qty', SAGE, INK), hdr('Rev.', SAGE, INK), hdr('Qty', G2), hdr('Rev.', G2), hdr('Qty', G), hdr('Rev.', G)]];
+  };
+  const numCells = (r, fill, bold) => {
+    const o = (v, b) => ({ text: v === 0 ? '-' : fmt(v), options: { align: 'right', fill: { color: fill }, bold: !!b || !!bold, color: v === 0 ? '9AA59F' : INK } });
+    return [o(r.fq), o(r.fr), o(r.yq), o(r.yr), o(r.tq, true), o(r.tr, true)];
+  };
+  const tblOpt = (y, colW, rowH, fs) => ({ x: 0.5, y, w: 9, colW, rowH, fontSize: fs, fontFace: 'Arial', border: { type: 'solid', pt: 0.5, color: 'D5DED8' }, margin: [0, 0.08, 0, 0.08], valign: 'middle' });
+  let y = 3.4;
+  s.addText('By Location', { x: 0.5, y, w: 9, h: 0.4, fontSize: 20, bold: true, color: G, margin: 0, isTextBox: true });
+  y += 0.5;
+  let rows = headerRows(['#', 'Location']);
+  D.loc.forEach((r, i) => { const f = i % 2 ? 'F4F8F0' : 'FFFFFF';
+    rows.push([{ text: String(i + 1), options: { align: 'center', fill: { color: f } } }, { text: r.loc, options: { fill: { color: f } } }, ...numCells(r, f)]); });
+  rows.push([{ text: 'Total Area South', options: { colspan: 2, bold: true, fill: { color: MIST } } }, ...numCells(T, MIST, true)]);
+  s.addTable(rows, tblOpt(y, [0.4, 2.5, 0.75, 1.0, 0.75, 1.05, 0.85, 1.7], RH_L, 12));
+  y += RH_L * (D.loc.length + 3) + 0.45;
+  const zebra = i => i % 2 ? 'F4F8F0' : 'FFFFFF';
+  if (nB) {
+    s.addText('By Brand', { x: 0.5, y, w: 9, h: 0.4, fontSize: 20, bold: true, color: G, margin: 0, isTextBox: true });
+    y += 0.5;
+    rows = headerRows(['#', 'Brand']);
+    D.brand.forEach((r, i) => { const f = zebra(i);
+      rows.push([{ text: String(i + 1), options: { align: 'center', fill: { color: f } } }, { text: r.brand, options: { fill: { color: f }, bold: true } }, ...numCells(r, f)]); });
+    if (!D.brand.length) rows.push([{ text: 'ไม่มีข้อมูล', options: { colspan: 8, align: 'center', color: MUTED } }]);
+    rows.push([{ text: 'Total', options: { colspan: 2, bold: true, fill: { color: MIST } } }, ...numCells(T, MIST, true)]);
+    s.addTable(rows, tblOpt(y, [0.4, 2.5, 0.75, 1.0, 0.75, 1.05, 0.85, 1.7], RH_L, 12));
+    y += RH_L * nB + 0.45;
+  }
+  if (TM) {
+    s.addText(D.model.length > MODEL_TOP ? 'By Model (Top ' + MODEL_TOP + ' by Qty)' : 'By Model', { x: 0.5, y, w: 9, h: 0.4, fontSize: 20, bold: true, color: G, margin: 0, isTextBox: true });
+    y += 0.5;
+    rows = headerRows(['#', 'Brand', 'Model']);
+    TM.rows.forEach((r, i) => { const f = zebra(i);
+      rows.push([{ text: String(i + 1), options: { align: 'center', fill: { color: f } } }, { text: r.brand, options: { fill: { color: f } } },
+        { text: r.model, options: { fill: { color: f }, bold: true } }, ...numCells(r, f)]); });
+    if (!TM.rows.length) rows.push([{ text: 'ไม่มีข้อมูล', options: { colspan: 9, align: 'center', color: MUTED } }]);
+    if (TM.other) rows.push([{ text: TM.other.model, options: { colspan: 3, italic: true, color: MUTED, fill: { color: 'FFFFFF' } } }, ...numCells(TM.other, 'FFFFFF')]);
+    s.addTable(rows, tblOpt(y, [0.4, 1.2, 2.2, 0.6, 0.85, 0.6, 1.0, 0.6, 1.55], RH_S, 11));
+    y += RH_S * nM + 0.45;
+  }
+  s.addText('By Staff', { x: 0.5, y, w: 9, h: 0.4, fontSize: 20, bold: true, color: G, margin: 0, isTextBox: true });
+  y += 0.5;
+  rows = headerRows(['#', 'Username', 'Location']);
+  D.staff.forEach((r, i) => { const f = i % 2 ? 'F4F8F0' : 'FFFFFF';
+    rows.push([{ text: String(i + 1), options: { align: 'center', fill: { color: f } } }, { text: r.Username, options: { fill: { color: f }, bold: true } },
+      { text: r.loc, options: { fill: { color: f } } }, ...numCells(r, f)]); });
+  if (!D.staff.length) rows.push([{ text: 'ไม่มีข้อมูล', options: { colspan: 9, align: 'center', color: MUTED } }]);
+  s.addTable(rows, tblOpt(y, [0.4, 1.2, 2.2, 0.6, 0.85, 0.6, 1.0, 0.6, 1.55], RH_S, 11));
+  y += RH_S * (Math.max(D.staff.length, 1) + 2) + 0.2;
+  s.addText('Rev.: Free = ค่าบริการรายเดือนหลัง Free1M, 12M = ราคารายปี (ดึงจาก Product Name)  •  Brand/Model เรียงตาม Qty', { x: 0.5, y, w: 9, h: 0.3, fontSize: 10, color: MUTED, margin: 0, isTextBox: true });
+  return pres;
+}
+// Excel export: Summary + one sheet per table (all models) + filtered raw data
+function buildXlsx(D) {
+  const wb = XLSX.utils.book_new();
+  const title = 'Care Plus ' + (D.mtd ? 'MTD' : 'Daily') + ' Performance — AIS Shop Area South — ' + (D.mtd ? 'MTD ' : 'Order Date ') + D.dateLabel;
+  const NUMH = ['Free Qty', 'Free Rev.', '12M Qty', '12M Rev.', 'Total Qty', 'Total Rev.'];
+  const nums = r => [r.fq, r.fr, r.yq, r.yr, r.tq, r.tr];
+  const add = (name, head, body, total, widths) => {
+    const aoa = [[title], [], [...head, ...NUMH], ...body];
+    if (total) aoa.push(total);
+    const ws = XLSX.utils.aoa_to_sheet(aoa);
+    ws['!cols'] = [...widths, 10, 12, 10, 12, 10, 13].map(w => ({ wch: w }));
+    ws['!autofilter'] = { ref: XLSX.utils.encode_range({ s: { r: 2, c: 0 }, e: { r: 2 + body.length, c: head.length + 5 } }) };
+    // number format with thousands separator
+    for (let R = 3; R < aoa.length; R++) for (let C = head.length; C < head.length + 6; C++) {
+      const c = ws[XLSX.utils.encode_cell({ r: R, c: C })]; if (c && typeof c.v === 'number') c.z = '#,##0';
+    }
+    XLSX.utils.book_append_sheet(wb, ws, name);
+  };
+  const T = D.T, active = D.loc.filter(r => r.tq > 0).length;
+  const sum = XLSX.utils.aoa_to_sheet([
+    [title], [],
+    ['Metric', 'Qty', 'Rev. (THB)'],
+    ['Free (Monthly)', T.fq, T.fr], ['12M (Yearly)', T.yq, T.yr], ['Total', T.tq, T.tr], [],
+    ['Active locations', active], ['Staff with orders', D.staff.length], [],
+    ['Rev.: Free = ค่าบริการรายเดือนหลัง Free1M, 12M = ราคารายปี (ดึงจาก Product Name)']]);
+  sum['!cols'] = [{ wch: 22 }, { wch: 10 }, { wch: 14 }];
+  ['B4', 'C4', 'B5', 'C5', 'B6', 'C6'].forEach(a => sum[a].z = '#,##0');
+  XLSX.utils.book_append_sheet(wb, sum, 'Summary');
+  add('By Location', ['#', 'Location Code', 'Location'], D.loc.map((r, i) => [i + 1, r.code, r.loc, ...nums(r)]), ['Total Area South', '', '', ...nums(T)], [5, 13, 28]);
+  if (D.hasBrand) add('By Brand', ['#', 'Brand'], D.brand.map((r, i) => [i + 1, r.brand, ...nums(r)]), ['Total', '', ...nums(T)], [5, 16]);
+  if (D.hasModel) add('By Model', ['#', 'Brand', 'Model'], D.model.map((r, i) => [i + 1, r.brand, r.model, ...nums(r)]), ['Total', '', '', ...nums(T)], [5, 14, 26]);
+  add('By Staff', ['#', 'Username', 'Location Code', 'Location'], D.staff.map((r, i) => [i + 1, r.Username, r.code, r.loc, ...nums(r)]), ['Total', '', '', '', ...nums(T)], [5, 14, 13, 28]);
+  const raw = [['Order Date', 'Location Code', 'Location', 'Username', 'Brand', 'Model', 'Product Name', 'Term', 'Rev.']];
+  D.recs.slice().sort((a, b) => a.dk - b.dk || a.code.localeCompare(b.code) || a.user.localeCompare(b.user)).forEach(x =>
+    raw.push([x.d ? String(x.d.d).padStart(2, '0') + '/' + String(x.d.m).padStart(2, '0') + '/' + x.d.y : '', x.code, LOCATIONS[x.code].short, x.user, x.brand, x.model, x.product, x.term, x.price]));
+  const wr = XLSX.utils.aoa_to_sheet(raw);
+  wr['!cols'] = [12, 13, 26, 13, 12, 22, 44, 7, 10].map(w => ({ wch: w }));
+  wr['!autofilter'] = { ref: XLSX.utils.encode_range({ s: { r: 0, c: 0 }, e: { r: raw.length - 1, c: 8 } }) };
+  XLSX.utils.book_append_sheet(wb, wr, 'Data');
+  return wb;
+}
+/* ===== END CORE ===== */
+
+/* ===== ART CORE (no DOM) ===== */
+// Merge several Care Plus files (e.g. CSV 01–07 + Excel 08). For each date, take records only from
+// the file that has the most rows for that date, so overlapping days are never double-counted.
+function mergeCp(list) {
+  if (!list.length) return null;
+  const byDate = {};                                   // dk -> [{i, n}]
+  list.forEach((p, i) => {
+    const cnt = {}; p.recs.forEach(x => { if (x.dk) cnt[x.dk] = (cnt[x.dk] || 0) + 1; });
+    Object.entries(cnt).forEach(([dk, n]) => (byDate[dk] = byDate[dk] || []).push({ i, n }));
+  });
+  const pick = {}, overlaps = [];
+  Object.entries(byDate).forEach(([dk, arr]) => {
+    arr.sort((a, b) => b.n - a.n || b.i - a.i);
+    pick[dk] = arr[0].i;
+    if (arr.length > 1) overlaps.push({ dk: +dk, used: list[arr[0].i].name, skipped: arr.slice(1).map(a => list[a.i].name) });
+  });
+  const recs = [];
+  list.forEach((p, i) => p.recs.forEach(x => { if (!x.dk || pick[x.dk] === i) recs.push(x); }));
+  const dmap = {}; recs.forEach(x => { if (x.d) dmap[x.dk] = x.d; });
+  const dates = Object.keys(dmap).map(Number).sort((a, b) => a - b).map(k => dmap[k]);
+  const unknown = {}; list.forEach(p => Object.entries(p.unknown).forEach(([k, v]) => unknown[k] = (unknown[k] || 0) + v));
+  return {
+    recs, dates, unknown, overlaps,
+    format: list.map(p => p.format).filter((v, i, a) => a.indexOf(v) === i).join(' + '),
+    total: list.reduce((a, p) => a + p.total, 0), outside: list.reduce((a, p) => a + p.outside, 0), dup: list.reduce((a, p) => a + p.dup, 0),
+    hasBrand: list.some(p => p.hasBrand), hasModel: list.some(p => p.hasModel)
+  };
+}
+
+// Device sale file (sheet Data_Sale): keep PRODUCT TYPE = DEVICE in our 9 locations
+function isDeviceHeader(row) { return (row || []).some(c => String(c).trim().toLowerCase() === 'product type'); }
+// Brands in PRODUCT TYPE = DEVICE that are not handsets → not counted as Device
+const EXCLUDED_DEVICE_BRANDS = ['BROVI', 'HONGKONGBOOST', 'TOZED', 'VPLUS'];
+
+// extraMap: optional {partnerCode: username} (e.g. from the Target sheet)
+function parseDevice(rows, extraMap) {
+  const norm = s => String(s == null ? '' : s).replace(/^\uFEFF/, '').trim().toLowerCase().replace(/\s+/g, ' ');
+  let hi = -1;
+  for (let i = 0; i < Math.min(rows.length, 20); i++) if (isDeviceHeader(rows[i])) { hi = i; break; }
+  if (hi < 0) throw new Error('ไม่พบคอลัมน์ "PRODUCT TYPE" ในไฟล์ Device Sale');
+  const H = rows[hi].map(norm);
+  const col = (...n) => { for (const x of n) { const i = H.indexOf(x); if (i >= 0) return i; } return -1; };
+  const cT = col('product type'), cD = col('recpt/inv date', 'inv date', 'date'), cB = col('brand'), cM = col('model'),
+        cQ = col('qty'), cA = col('grand total'), cU = col('sale_employee_id', 'sale employee id'), cL = col('location code');
+  const miss = [['LOCATION CODE', cL], ['SALE_EMPLOYEE_ID', cU], ['MODEL', cM]].filter(x => x[1] < 0).map(x => x[0]);
+  if (miss.length) throw new Error('ไฟล์ Device Sale ไม่พบคอลัมน์: ' + miss.join(', '));
+  // Some rows carry the numeric employee code instead of the login → map code → login
+  const cC = col('sale employee code'), cX = col('column1'), isNum = v => /^\d+(\.0+)?$/.test(String(v).trim());
+  const code2user = Object.assign({}, extraMap || {});
+  for (let i = hi + 1; i < rows.length; i++) {
+    const r = rows[i]; if (!r || cC < 0) continue;
+    const c = String(r[cC] || '').trim().replace(/\.0+$/, ''), u = String(r[cU] || '').trim();
+    if (c && u && !isNum(u)) code2user[c] = u.toUpperCase();
+  }
+  let mapped = 0;
+  const userOf = r => {
+    let u = String(r[cU] || '').trim();
+    if (u && isNum(u)) {
+      const k = u.replace(/\.0+$/, ''), c = cC >= 0 ? String(r[cC] || '').trim().replace(/\.0+$/, '') : '';
+      const alt = code2user[k] || code2user[c] || (cX >= 0 && r[cX] && !isNum(r[cX]) ? String(r[cX]).trim().toUpperCase() : '');
+      if (alt) { u = alt; mapped++; }
+    }
+    return u.toUpperCase() || '(ไม่ระบุ)';
+  };
+  const recs = [], excluded = {}; let total = 0, outside = 0, other = 0;
+  for (let i = hi + 1; i < rows.length; i++) {
+    const r = rows[i]; if (!r || r.every(c => c === '' || c == null)) continue;
+    if (String(r[cT] || '').trim().toUpperCase() !== 'DEVICE') { other++; continue; }
+    total++;
+    const code = String(r[cL] == null ? '' : r[cL]).trim().replace(/\.0+$/, '');
+    if (!LOCATIONS[code]) { outside++; continue; }
+    const br = cB >= 0 ? String(r[cB] || '').trim().toUpperCase() : '';
+    if (EXCLUDED_DEVICE_BRANDS.includes(br)) { excluded[br] = (excluded[br] || 0) + (cQ >= 0 ? (+r[cQ] || 0) : 1); continue; }
+    const d = cD >= 0 ? parseDate(r[cD]) : null;
+    recs.push({
+      code, d, dk: d ? dKey(d) : 0,
+      brand: cB >= 0 ? (String(r[cB] || '').trim().toUpperCase() || '(ไม่ระบุ)') : '(ไม่ระบุ)',
+      model: String(r[cM] || '').trim().toUpperCase() || '(ไม่ระบุ)',
+      user: userOf(r),
+      qty: cQ >= 0 ? (+r[cQ] || 0) : 1, amt: cA >= 0 ? (+r[cA] || 0) : 0
+    });
+  }
+  const swapped = fixDateOrder(recs);
+  const dmap = {}; recs.forEach(x => { if (x.d) dmap[x.dk] = x.d; });
+  const dates = Object.keys(dmap).map(Number).sort((a, b) => a - b).map(k => dmap[k]);
+  return { recs, dates, total, outside, other, mapped, excluded, swapped };
+}
+
+// sel: {dk} single day, or {month:{y,m}} for MTD
+function artFilter(sel) {
+  if (sel.dk) return x => x.dk === sel.dk;
+  return x => x.d && x.d.y === sel.month.y && x.d.m === sel.month.m;
+}
+const gapOf = (t, dq, cq) => dq > 0 ? Math.max(0, Math.ceil(Math.round((t * dq - cq) * 1e6) / 1e6)) : 0;
+
+function aggregateArt(CP, DV, sel) {
+  const f = artFilter(sel);
+  const cp = CP ? CP.recs.filter(f) : [], dv = DV ? DV.recs.filter(f) : [];
+  const blank = o => Object.assign(o, { dq: 0, da: 0, fq: 0, yq: 0, cq: 0, cr: 0 });
+  const loc = {}; Object.keys(LOCATIONS).forEach(k => loc[k] = blank({ code: k, loc: LOCATIONS[k].short }));
+  const staff = {}, brand = {}, model = {};
+  const targets = x => {
+    const sk = x.user + '|' + x.code, mk = x.brand + '|' + x.model;
+    return [loc[x.code],
+      staff[sk] || (staff[sk] = blank({ Username: x.user, code: x.code, loc: LOCATIONS[x.code].short })),
+      brand[x.brand] || (brand[x.brand] = blank({ brand: x.brand })),
+      model[mk] || (model[mk] = blank({ brand: x.brand, model: x.model }))];
+  };
+  dv.forEach(x => targets(x).forEach(o => { o.dq += x.qty; o.da += x.amt; }));
+  cp.forEach(x => targets(x).forEach(o => { if (x.term === 'Free') o.fq++; else o.yq++; o.cq++; o.cr += x.price; }));
+  const fin = o => { o.art = o.dq > 0 ? o.cq / o.dq : null; return o; };
+  const byArt = (a, b) => (b.art ?? -1) - (a.art ?? -1) || b.dq - a.dq;
+  const L = Object.values(loc).map(fin).sort((a, b) => byArt(a, b) || a.loc.localeCompare(b.loc));
+  const S = Object.values(staff).map(fin).sort((a, b) => byArt(a, b) || a.Username.localeCompare(b.Username));
+  const B = Object.values(brand).map(fin).sort((a, b) => b.dq - a.dq || b.cq - a.cq || a.brand.localeCompare(b.brand));
+  const M = Object.values(model).map(fin).sort((a, b) => b.dq - a.dq || b.cq - a.cq || a.model.localeCompare(b.model));
+  const T = fin(['dq', 'da', 'fq', 'yq', 'cq', 'cr'].reduce((t, k) => (t[k] = L.reduce((a, r) => a + r[k], 0), t), {}));
+  let ds, label, file;
+  if (sel.dk) { const d = [...(CP ? CP.dates : []), ...(DV ? DV.dates : [])].find(d => dKey(d) === sel.dk); ds = d ? [d] : []; label = d ? dTxt(d) : '-'; file = d ? fileDate([d]) : 'NoDate'; }
+  else {
+    const m = {}; [...cp, ...dv].forEach(x => { if (x.d) m[x.dk] = x.d; });
+    ds = Object.keys(m).map(Number).sort((a, b) => a - b).map(k => m[k]);
+    label = ds.length ? dateLabel(ds.slice()) : MONTHS[sel.month.m - 1] + ' ' + sel.month.y;
+    file = ds.length ? String(ds[0].d).padStart(2, '0') + '-' + fileDate(ds) : 'MTD';
+  }
+  return { loc: L, staff: S, brand: B, model: M, T, cpRecs: cp, dvRecs: dv, mtd: !sel.dk, dateLabel: label, fileDate: file,
+    noCp: !cp.length, noDv: !dv.length };
+}
+
+function topArtModels(M, n) {
+  if (M.length <= n) return { rows: M, other: null };
+  const rest = M.slice(n), o = { brand: '', model: 'Others (' + rest.length + ' models)', dq: 0, da: 0, fq: 0, yq: 0, cq: 0, cr: 0 };
+  rest.forEach(r => ['dq', 'da', 'fq', 'yq', 'cq', 'cr'].forEach(k => o[k] += r[k]));
+  o.art = o.dq > 0 ? o.cq / o.dq : null;
+  return { rows: M.slice(0, n), other: o };
+}
+const pct = v => v == null ? '-' : (v * 100).toFixed(1) + '%';
+
+// ---------- PowerPoint: one long slide (Location, Model Top 20, Staff) ----------
+function buildArtPptx(A, t) {
+  const G = '0A5C36', G2 = '1E8C5A', LIME = '8DC63F', SAGE = 'C9DDB8', MIST = 'EEF5E6', INK = '1F2A24', MUTED = '5B6B63',
+        RED = 'C0262D', REDBG = 'FDE2E1';
+  const TM = topArtModels(A.model, MODEL_TOP);
+  const RH_L = 0.3, RH_S = 0.25;
+  const nL = A.loc.length + 3, nM = Math.max(TM.rows.length, 1) + 2 + (TM.other ? 1 : 0), nS = Math.max(A.staff.length, 1) + 2;
+  const H = 3.0 + 0.4 + 0.5 + RH_L * nL + 0.45 + 0.5 + RH_S * nM + 0.45 + 0.5 + RH_S * nS + 0.8;
+  const pres = new PptxGenJS();
+  pres.defineLayout({ name: 'LONG', width: 10, height: Math.min(56, Math.ceil(H * 10) / 10) }); pres.layout = 'LONG';
+  pres.theme = { headFontFace: 'Arial', bodyFontFace: 'Arial' };
+  const kind = A.mtd ? 'MTD' : 'Daily';
+  pres.title = '%ART Care Plus vs Device ' + kind + ' ' + A.dateLabel;
+  const s = pres.addSlide(); s.background = { color: 'FFFFFF' };
+  s.addShape(pres.shapes.RECTANGLE, { x: 0, y: 0, w: 10, h: 3.0, fill: { color: G }, line: { type: 'none' }, objectName: 'Header' });
+  s.addText('%ART Care Plus vs Device', { x: 0.5, y: 0.35, w: 9, h: 0.6, fontSize: 30, bold: true, color: 'FFFFFF', margin: 0, isTextBox: true });
+  s.addText('AIS Shop Area South  •  ' + (A.mtd ? 'MTD ' : 'Date ') + A.dateLabel + '  •  เกณฑ์ %ART ' + pct(t), { x: 0.5, y: 0.95, w: 9, h: 0.35, fontSize: 14, color: SAGE, margin: 0, isTextBox: true });
+  const T = A.T, gapT = gapOf(t, T.dq, T.cq);
+  [{ l: 'Device Units', v: fmt(T.dq), s: 'Device Sale' },
+   { l: 'Care Plus Orders', v: fmt(T.cq), s: 'Free ' + fmt(T.fq) + ' • 12M ' + fmt(T.yq) },
+   { l: '%ART', v: pct(T.art), s: 'Care Plus ÷ Device', red: T.art != null && T.art < t },
+   { l: 'Gap to ' + pct(t), v: fmt(gapT), s: 'Care Plus ที่ต้องทำเพิ่ม', red: gapT > 0 }].forEach((c, i) => {
+    const x = 0.5 + i * 2.3, y = 1.5;
+    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y, w: 2.05, h: 1.25, rectRadius: 0.08, fill: { color: 'FFFFFF' }, line: { type: 'none' }, objectName: 'KPI ' + c.l });
+    s.addText(c.l, { x: x + 0.18, y: y + 0.12, w: 1.75, h: 0.28, fontSize: 12, color: MUTED, margin: 0, isTextBox: true });
+    s.addText(c.v, { x: x + 0.18, y: y + 0.4, w: 1.75, h: 0.5, fontSize: 28, bold: true, color: c.red ? RED : G, margin: 0, fit: 'shrink', isTextBox: true });
+    s.addText(c.s, { x: x + 0.18, y: y + 0.9, w: 1.8, h: 0.25, fontSize: 11, color: MUTED, margin: 0, isTextBox: true });
+  });
+  const H1 = (t, o) => ({ text: t, options: Object.assign({ bold: true, color: 'FFFFFF', fill: { color: G }, align: 'center', valign: 'middle' }, o || {}) });
+  const head = first => [
+    [...first.map(t => H1(t, { rowspan: 2, align: t === '#' ? 'center' : 'left' })),
+     H1('Device', { rowspan: 2, fill: { color: '3D4A43' } }),
+     H1('Care Plus', { colspan: 3, fill: { color: LIME }, color: INK }),
+     H1('%ART', { rowspan: 2 }), H1('Gap', { rowspan: 2 }), H1('Care+ Rev.', { rowspan: 2, fill: { color: G2 } })],
+    [H1('Free', { fill: { color: SAGE }, color: INK }), H1('12M', { fill: { color: SAGE }, color: INK }), H1('Total', { fill: { color: SAGE }, color: INK })]];
+  const cells = (r, fill, bold) => {
+    const n = (v, o) => ({ text: v ? fmt(v) : '-', options: Object.assign({ align: 'right', fill: { color: fill }, bold: !!bold, color: v ? INK : '9AA59F' }, o || {}) });
+    const red = r.art != null && r.art < t, gap = gapOf(t, r.dq, r.cq);
+    return [n(r.dq, { bold: true }), n(r.fq), n(r.yq), n(r.cq, { bold: true }),
+      { text: pct(r.art), options: { align: 'right', bold: true, fill: { color: red ? REDBG : fill }, color: red ? RED : (r.art == null ? '9AA59F' : G) } },
+      n(gap, gap ? { color: RED, bold: true } : {}), n(Math.round(r.cr))];
+  };
+  const opt = (y, colW, rowH, fs) => ({ x: 0.5, y, w: 9, colW, rowH, fontSize: fs, fontFace: 'Arial', border: { type: 'solid', pt: 0.5, color: 'D5DED8' }, margin: [0, 0.07, 0, 0.07], valign: 'middle' });
+  const zebra = i => i % 2 ? 'F4F8F0' : 'FFFFFF';
+  const title = (txt, y) => s.addText(txt, { x: 0.5, y, w: 9, h: 0.4, fontSize: 20, bold: true, color: G, margin: 0, isTextBox: true });
+  const idx = (i, f) => ({ text: String(i + 1), options: { align: 'center', fill: { color: f } } });
+  let y = 3.4, rows;
+  title('By Location', y); y += 0.5;
+  rows = head(['#', 'Location']);
+  A.loc.forEach((r, i) => { const f = zebra(i); rows.push([idx(i, f), { text: r.loc, options: { fill: { color: f } } }, ...cells(r, f)]); });
+  rows.push([{ text: 'Total Area South', options: { colspan: 2, bold: true, fill: { color: MIST } } }, ...cells(T, MIST, true)]);
+  s.addTable(rows, opt(y, [0.4, 2.3, 0.85, 0.75, 0.75, 0.85, 0.9, 0.75, 1.45], RH_L, 12));
+  y += RH_L * nL + 0.45;
+  title(A.model.length > MODEL_TOP ? 'By Model (Top ' + MODEL_TOP + ' by Device)' : 'By Model', y); y += 0.5;
+  rows = head(['#', 'Brand', 'Model']);
+  TM.rows.forEach((r, i) => { const f = zebra(i); rows.push([idx(i, f), { text: r.brand, options: { fill: { color: f } } }, { text: r.model, options: { fill: { color: f }, bold: true } }, ...cells(r, f)]); });
+  if (!TM.rows.length) rows.push([{ text: 'ไม่มีข้อมูล', options: { colspan: 10, align: 'center', color: MUTED } }]);
+  if (TM.other) rows.push([{ text: TM.other.model, options: { colspan: 3, italic: true, color: MUTED } }, ...cells(TM.other, 'FFFFFF')]);
+  s.addTable(rows, opt(y, [0.4, 1.1, 2.5, 0.7, 0.6, 0.6, 0.7, 0.8, 0.6, 1.0], RH_S, 10.5));
+  y += RH_S * nM + 0.45;
+  title('Staff Performance — Care Plus vs Device', y); y += 0.5;
+  rows = head(['#', 'Username', 'Location']);
+  A.staff.forEach((r, i) => { const f = zebra(i); rows.push([idx(i, f), { text: r.Username, options: { fill: { color: f }, bold: true } }, { text: r.loc, options: { fill: { color: f } } }, ...cells(r, f)]); });
+  if (!A.staff.length) rows.push([{ text: 'ไม่มีข้อมูล', options: { colspan: 10, align: 'center', color: MUTED } }]);
+  s.addTable(rows, opt(y, [0.4, 1.15, 2.0, 0.7, 0.6, 0.6, 0.7, 0.8, 0.6, 1.45], RH_S, 10.5));
+  y += RH_S * nS + 0.2;
+  s.addText('%ART = Care Plus Orders ÷ Device Units  •  พื้นแดง = %ART ต่ำกว่า ' + pct(t) + ' (ต้อง Focus)  •  Gap = Care Plus ที่ต้องทำเพิ่มเพื่อถึงเกณฑ์',
+    { x: 0.5, y, w: 9, h: 0.3, fontSize: 10, color: MUTED, margin: 0, isTextBox: true });
+  return pres;
+}
+
+// ---------- Excel (ExcelJS): real conditional formatting, editable threshold on Summary!C2 ----------
+async function buildArtXlsx(A, t) {
+  const wb = new ExcelJS.Workbook(); wb.creator = 'AIS Area South';
+  const G = 'FF0A5C36', LIME = 'FF8DC63F', SAGE = 'FFC9DDB8', MIST = 'FFEEF5E6', DARK = 'FF3D4A43';
+  const title = '%ART Care Plus vs Device — AIS Shop Area South — ' + (A.mtd ? 'MTD ' : 'Date ') + A.dateLabel;
+  const colL = i => { let s = ''; i++; while (i) { const m = (i - 1) % 26; s = String.fromCharCode(65 + m) + s; i = Math.floor((i - 1) / 26); } return s; };
+  const RED_CF = { fill: { type: 'pattern', pattern: 'solid', bgColor: { argb: 'FFFFC7CE' } }, font: { color: { argb: 'FF9C0006' }, bold: true } };
+  const top = (ws, isSummary) => {
+    ws.getCell('A1').value = title; ws.getCell('A1').font = { bold: true, size: 14, color: { argb: G } };
+    ws.getCell('A2').value = 'เกณฑ์สีแดง: %ART ต่ำกว่า'; ws.getCell('A2').font = { color: { argb: 'FF5B6B63' } };
+    const c = ws.getCell('C2');
+    c.value = isSummary ? t : { formula: 'Summary!$C$2', result: t };
+    c.numFmt = '0.0%'; c.font = { bold: true, color: { argb: 'FFC0262D' } };
+    if (isSummary) { c.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFFF4DC' } }; ws.getCell('D2').value = '← แก้ตัวเลขนี้ได้ สีแดงทุก sheet จะอัปเดตตาม'; ws.getCell('D2').font = { italic: true, color: { argb: 'FF5B6B63' } }; }
+  };
+  // table sheet: head = leading text columns; rows = objects
+  const table = (name, lead, widths, rows, leadVals, total) => {
+    const ws = wb.addWorksheet(name, { views: [{ state: 'frozen', ySplit: 3 }] });
+    top(ws, false);
+    const heads = [...lead, 'Device Qty', 'Care+ Free', 'Care+ 12M', 'Care+ Total', '%ART', 'Gap', 'Care+ Rev.'];   // Device revenue is confidential — never exported
+    const hr = ws.getRow(3); hr.values = heads; hr.height = 22;
+    heads.forEach((h, i) => {
+      const c = hr.getCell(i + 1);
+      const fill = i < lead.length ? G : h === 'Device Qty' ? DARK : h.startsWith('Care+') && h !== 'Care+ Rev.' ? LIME : G;
+      c.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: fill } };
+      c.font = { bold: true, color: { argb: fill === LIME ? 'FF1F2A24' : 'FFFFFFFF' } };
+      c.alignment = { horizontal: 'center', vertical: 'middle' };
+    });
+    const k = lead.length, D = colL(k), Tt = colL(k + 3), ART = colL(k + 4), GAP = colL(k + 5);
+    const put = (rn, lv, r, bold) => {
+      const row = ws.getRow(rn);
+      lv.forEach((v, i) => row.getCell(i + 1).value = v);
+      [r.dq, r.fq, r.yq, r.cq].forEach((v, i) => row.getCell(k + 1 + i).value = v);
+      row.getCell(k + 5).value = { formula: `IF(${D}${rn}=0,"-",${Tt}${rn}/${D}${rn})`, result: r.art == null ? '-' : r.art };
+      row.getCell(k + 6).value = { formula: `IF(${D}${rn}=0,0,MAX(0,ROUNDUP(ROUND($C$2*${D}${rn}-${Tt}${rn},6),0)))`, result: gapOf(t, r.dq, r.cq) };
+      row.getCell(k + 7).value = Math.round(r.cr);
+      for (let c = k + 1; c <= k + 7; c++) row.getCell(c).numFmt = c === k + 5 ? '0.0%' : '#,##0';
+      row.getCell(k + 5).alignment = { horizontal: 'right' };
+      if (bold) row.eachCell(c => { c.font = { bold: true }; c.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: MIST } }; });
+    };
+    rows.forEach((r, i) => put(4 + i, leadVals(r, i), r));
+    const last = 3 + rows.length;
+    if (total) put(last + 1, total.lead, total.row, true);
+    if (rows.length) {
+      ws.addConditionalFormatting({ ref: `${ART}4:${ART}${last + (total ? 1 : 0)}`, rules: [{ type: 'expression', priority: 1, formulae: [`AND(ISNUMBER(${ART}4),${ART}4<$C$2)`], style: RED_CF }] });
+      ws.addConditionalFormatting({ ref: `${GAP}4:${GAP}${last + (total ? 1 : 0)}`, rules: [{ type: 'expression', priority: 2, formulae: [`${GAP}4>0`], style: { font: { color: { argb: 'FF9C0006' }, bold: true } } }] });
+      ws.autoFilter = { from: { row: 3, column: 1 }, to: { row: last, column: heads.length } };
+    }
+    ws.columns.forEach((c, i) => c.width = i < widths.length ? widths[i] : (i === k + 4 ? 9 : 12));
+  };
+  // Summary
+  const S = wb.addWorksheet('Summary');
+  top(S, true);
+  const T = A.T;
+  S.getRow(4).values = ['Metric', 'Value'];
+  S.getRow(4).eachCell(c => { c.font = { bold: true, color: { argb: 'FFFFFFFF' } }; c.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: G } }; });
+  [['Device Units', T.dq, '#,##0'], ['Care Plus Orders', T.cq, '#,##0'], ['  Free (Monthly)', T.fq, '#,##0'], ['  12M (Yearly)', T.yq, '#,##0'],
+   ['Care Plus Rev. (THB)', Math.round(T.cr), '#,##0']].forEach((r, i) => {
+    const row = S.getRow(5 + i); row.values = [r[0], r[1]]; row.getCell(2).numFmt = r[2];
+  });
+  S.getCell('A11').value = '%ART'; S.getCell('B11').value = { formula: 'IF(B5=0,"-",B6/B5)', result: T.art == null ? '-' : T.art }; S.getCell('B11').numFmt = '0.0%';
+  S.getCell('A12').value = 'Gap to threshold'; S.getCell('B12').value = { formula: `'By Location'!I${4 + A.loc.length}`, result: gapOf(t, T.dq, T.cq) }; S.getCell('B12').numFmt = '#,##0';
+  ['A11', 'B11', 'A12', 'B12'].forEach(a => S.getCell(a).font = { bold: true });
+  S.addConditionalFormatting({ ref: 'B11', rules: [{ type: 'expression', priority: 1, formulae: ['AND(ISNUMBER(B11),B11<$C$2)'], style: RED_CF }] });
+  S.getCell('A14').value = '%ART = Care Plus Orders ÷ Device Units · Gap = Care Plus ที่ต้องทำเพิ่มเพื่อถึงเกณฑ์ · Care+ Rev.: Free = ค่ารายเดือนหลัง Free1M, 12M = ราคารายปี';
+  S.getCell('A14').font = { italic: true, color: { argb: 'FF5B6B63' } };
+  S.columns = [{ width: 24 }, { width: 14 }, { width: 10 }, { width: 40 }];
+  table('By Location', ['#', 'Location Code', 'Location'], [5, 13, 26], A.loc, (r, i) => [i + 1, r.code, r.loc],
+    { lead: ['Total Area South', '', ''], row: T });
+  table('By Brand', ['#', 'Brand'], [5, 16], A.brand, (r, i) => [i + 1, r.brand], { lead: ['Total', ''], row: T });
+  table('By Model', ['#', 'Brand', 'Model'], [5, 14, 26], A.model, (r, i) => [i + 1, r.brand, r.model], { lead: ['Total', '', ''], row: T });
+  table('By Staff', ['#', 'Username', 'Location Code', 'Location'], [5, 14, 13, 26], A.staff, (r, i) => [i + 1, r.Username, r.code, r.loc], { lead: ['Total', '', '', ''], row: T });
+  // raw data
+  const dstr = x => x.d ? String(x.d.d).padStart(2, '0') + '/' + String(x.d.m).padStart(2, '0') + '/' + x.d.y : '';
+  const raw = (name, heads, widths, data) => {
+    const ws = wb.addWorksheet(name, { views: [{ state: 'frozen', ySplit: 1 }] });
+    ws.getRow(1).values = heads;
+    ws.getRow(1).eachCell(c => { c.font = { bold: true, color: { argb: 'FFFFFFFF' } }; c.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: G } }; });
+    data.forEach((r, i) => ws.getRow(2 + i).values = r);
+    ws.columns = widths.map(w => ({ width: w }));
+    if (data.length) ws.autoFilter = { from: { row: 1, column: 1 }, to: { row: 1 + data.length, column: heads.length } };
+  };
+  const srt = (a, b) => a.dk - b.dk || a.code.localeCompare(b.code) || a.user.localeCompare(b.user);
+  raw('Data_Device', ['Date', 'Location Code', 'Location', 'Username', 'Brand', 'Model', 'Qty'], [12, 13, 26, 13, 14, 24, 7],
+    A.dvRecs.slice().sort(srt).map(x => [dstr(x), x.code, LOCATIONS[x.code].short, x.user, x.brand, x.model, x.qty]));
+  raw('Data_CarePlus', ['Date', 'Location Code', 'Location', 'Username', 'Brand', 'Model', 'Product Name', 'Term', 'Rev.'], [12, 13, 26, 13, 14, 24, 44, 7, 10],
+    A.cpRecs.slice().sort(srt).map(x => [dstr(x), x.code, LOCATIONS[x.code].short, x.user, x.brand, x.model, x.product, x.term, x.price]));
+  return wb;
+}
+/* ===== END ART CORE ===== */
+
+
+/* ===== UI ===== */
+const $ = id => document.getElementById(id);
+let DATA = null, PARSED = null, SHOW_ALL_MODELS = false;
+let CP_FILES = [], DEVICE = null, DEVICE_NAME = '', ART = null, ART_ALL_MODELS = false;
+$('locList').textContent = 'ดึงเฉพาะ: ' + Object.entries(LOCATIONS).map(([k, v]) => k + ' ' + v.short).join(' · ');
+
+function showError(msg) { $('err').textContent = msg; $('err').hidden = false; }
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+
+/* ---------- tabs ---------- */
+document.querySelectorAll('[role=tab]').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('[role=tab]').forEach(x => {
+    const on = x === b; x.setAttribute('aria-selected', on); $(x.getAttribute('aria-controls')).hidden = !on;
+  });
+}));
+
+/* ---------- TAB 1 render (Care Plus) ---------- */
+function headHTML(first) {
+  return '<thead><tr>' + first.map(t => `<th class="g ${t === '#' ? '' : 'left'}" rowspan="2">${t}</th>`).join('') +
+    '<th class="f" colspan="2">Free (Monthly)</th><th class="y" colspan="2">12M (Yearly)</th><th class="g" colspan="2">Total</th></tr>' +
+    '<tr><th class="f2">Qty</th><th class="f2">Rev.</th><th class="y">Qty</th><th class="y">Rev.</th><th class="g">Qty</th><th class="g">Rev.</th></tr></thead>';
+}
+function numHTML(r) {
+  const c = (v, b) => `<td class="n${v === 0 ? ' z' : ''}${b ? ' b' : ''}">${v === 0 ? '-' : fmt(v)}</td>`;
+  return c(r.fq) + c(r.fr) + c(r.yq) + c(r.yr) + c(r.tq, 1) + c(r.tr, 1);
+}
+function cpWarnings(P) {
+  const w = [];
+  if (P.outside) w.push(`ตัดออก ${fmt(P.outside)} จาก ${fmt(P.total)} แถว (สาขานอกความดูแล)`);
+  if (P.dup) w.push(`ตัด order_num ซ้ำ ${fmt(P.dup)} แถว`);
+  (P.overlaps || []).forEach(o => w.push(`วันที่ ${dTxt({ d: o.dk % 100, m: Math.floor(o.dk / 100) % 100, y: Math.floor(o.dk / 10000) })} มีในหลายไฟล์ → ใช้จาก ${esc(o.used)} (ไม่นับซ้ำจาก ${o.skipped.map(esc).join(', ')})`));
+  CP_FILES.forEach(f => {
+    if (f.swapped) w.push(`${esc(f.name)}: วันที่ในไฟล์เป็นแบบ เดือน/วัน (ไฟล์ถูกเปิด-บันทึกใน Excel) → สลับเป็น วัน/เดือน ให้แล้ว`);
+    if (f.noDate) w.push(`${esc(f.name)}: อ่านวันที่ไม่ได้ ${fmt(f.noDate)} แถว (คอลัมน์ ${esc(f.dateCol || '-')}, ตัวอย่างค่า "${esc(f.sample)}")`);
+  });
+  const u = Object.entries(P.unknown);
+  if (u.length) w.push(`ไม่นับ ${u.reduce((a, x) => a + x[1], 0)} แถว เพราะอ่าน Free/12M จาก Product Name ไม่ได้: ` + u.map(x => `${esc(x[0])} (${x[1]})`).join(', '));
+  return w;
+}
+function render(D) {
+  const T = D.T, active = D.loc.filter(r => r.tq > 0).length;
+  $('meta').textContent = `· ${PARSED.format} · ${fmt(T.tq)} orders`;
+  $('kpis').innerHTML = [
+    ['Total Orders', fmt(T.tq), active + ' locations · ' + D.staff.length + ' staff', ''],
+    ['Total Rev. (THB)', fmt(T.tr), 'Free + 12M', ''],
+    ['Free (Monthly)', fmt(T.fq), 'Rev. ' + fmt(T.fr) + ' THB', 'free'],
+    ['12M (Yearly)', fmt(T.yq), 'Rev. ' + fmt(T.yr) + ' THB', '']
+  ].map(k => `<div class="kpi ${k[3]}"><div class="l">${k[0]}</div><div class="v">${k[1]}</div><div class="s">${k[2]}</div></div>`).join('');
+  $('tLoc').innerHTML = headHTML(['#', 'Location']) + '<tbody>' +
+    D.loc.map((r, i) => `<tr><td class="c">${i + 1}</td><td>${esc(r.loc)}</td>${numHTML(r)}</tr>`).join('') +
+    `</tbody><tfoot><tr><td colspan="2">Total Area South</td>${numHTML(T)}</tr></tfoot>`;
+  $('secBrand').hidden = !D.hasBrand;
+  if (D.hasBrand) $('tBrand').innerHTML = headHTML(['#', 'Brand']) + '<tbody>' +
+    (D.brand.length ? D.brand.map((r, i) => `<tr><td class="c">${i + 1}</td><td class="b">${esc(r.brand)}</td>${numHTML(r)}</tr>`).join('') : '<tr><td colspan="8" class="c">ไม่มีข้อมูล</td></tr>') +
+    `</tbody><tfoot><tr><td colspan="2">Total</td>${numHTML(T)}</tr></tfoot>`;
+  $('secModel').hidden = !D.hasModel;
+  if (D.hasModel) renderModels(D);
+  $('tStaff').innerHTML = headHTML(['#', 'Username', 'Location']) + '<tbody>' +
+    (D.staff.length ? D.staff.map((r, i) => `<tr><td class="c">${i + 1}</td><td class="b">${esc(r.Username)}</td><td>${esc(r.loc)}</td>${numHTML(r)}</tr>`).join('')
+      : '<tr><td colspan="9" class="c">ไม่มีข้อมูลของสาขาในความดูแล</td></tr>') + '</tbody>';
+  const w = cpWarnings(PARSED);
+  $('warn').innerHTML = w.join('<br>'); $('warn').hidden = !w.length;
+  $('result').hidden = false;
+}
+function renderModels(D) {
+  const many = D.model.length > MODEL_TOP, TM = SHOW_ALL_MODELS ? { rows: D.model, other: null } : topModels(D.model, MODEL_TOP);
+  $('hModel').textContent = many && !SHOW_ALL_MODELS ? `By Model (Top ${MODEL_TOP} by Qty)` : 'By Model';
+  $('tModel').innerHTML = headHTML(['#', 'Brand', 'Model']) + '<tbody>' +
+    (TM.rows.length ? TM.rows.map((r, i) => `<tr><td class="c">${i + 1}</td><td>${esc(r.brand)}</td><td class="b">${esc(r.model)}</td>${numHTML(r)}</tr>`).join('') : '<tr><td colspan="9" class="c">ไม่มีข้อมูล</td></tr>') +
+    (TM.other ? `<tr class="oth"><td colspan="3">${esc(TM.other.model)}</td>${numHTML(TM.other)}</tr>` : '') + '</tbody>';
+  $('btnMore').hidden = !many;
+  $('btnMore').textContent = SHOW_ALL_MODELS ? `แสดงเฉพาะ Top ${MODEL_TOP}` : `แสดงทั้งหมด ${D.model.length} รุ่น`;
+}
+function setDate(dk) { DATA = aggregate(PARSED, dk); render(DATA); }
+function fillDates() {
+  const sel = $('dateSel'), ds = PARSED.dates;
+  sel.innerHTML = ds.slice().reverse().map(d => `<option value="${dKey(d)}">${dTxt(d)}</option>`).join('') +
+    (ds.length > 1 ? `<option value="0">MTD ทุกวัน (${dateLabel(ds.slice())})</option>` : '');
+  if (!ds.length) sel.innerHTML = '<option value="0">ทั้งไฟล์</option>';
+  sel.value = ds.length ? String(dKey(ds[ds.length - 1])) : '0';
+  setDate(+sel.value);
+}
+
+/* ---------- TAB 2 render (%ART) ---------- */
+function artTarget() {
+  const v = parseFloat($('artTarget').value);
+  return isFinite(v) ? v / 100 : (ART && ART.T.art != null ? ART.T.art : 0);
+}
+function artHead(first) {
+  return '<thead><tr>' + first.map(t => `<th class="g ${t === '#' ? '' : 'left'}" rowspan="2">${t}</th>`).join('') +
+    '<th class="d" rowspan="2">Device</th><th class="f" colspan="3">Care Plus</th><th class="g" rowspan="2">%ART</th><th class="g" rowspan="2">Gap</th><th class="y" rowspan="2">Care+ Rev.</th></tr>' +
+    '<tr><th class="f2">Free</th><th class="f2">12M</th><th class="f2">Total</th></tr></thead>';
+}
+function artCells(r, t) {
+  const c = (v, b) => `<td class="n${v ? '' : ' z'}${b ? ' b' : ''}">${v ? fmt(v) : '-'}</td>`;
+  const red = r.art != null && r.art < t, gap = gapOf(t, r.dq, r.cq);
+  return c(r.dq, 1) + c(r.fq) + c(r.yq) + c(r.cq, 1) +
+    `<td class="n b ${red ? 'red' : (r.art == null ? 'z' : 'ok')}">${pct(r.art)}</td>` +
+    `<td class="n${gap ? ' gap' : ' z'}">${gap ? fmt(gap) : '-'}</td>` + c(Math.round(r.cr));
+}
+function renderArt() {
+  if (!ART) return;
+  const t = artTarget(), T = ART.T, A = ART;
+  const gapT = gapOf(t, T.dq, T.cq);
+  $('artTargetHint').textContent = $('artTarget').value === '' ? `(ว่าง = ค่าเฉลี่ย Area ${pct(T.art)})` : '';
+  const red = T.art != null && T.art < t;
+  $('artKpis').innerHTML = [
+    ['Device Units', fmt(T.dq), 'Device Sale', ''],
+    ['Care Plus Orders', fmt(T.cq), 'Free ' + fmt(T.fq) + ' · 12M ' + fmt(T.yq), ''],
+    ['%ART', pct(T.art), 'Care Plus ÷ Device', red ? 'bad' : ''],
+    ['Gap to ' + pct(t), fmt(gapT), 'Care Plus ที่ต้องทำเพิ่ม', gapT ? 'bad' : '']
+  ].map(k => `<div class="kpi ${k[3]}"><div class="l">${k[0]}</div><div class="v">${k[1]}</div><div class="s">${k[2]}</div></div>`).join('');
+  $('aLoc').innerHTML = artHead(['#', 'Location']) + '<tbody>' +
+    A.loc.map((r, i) => `<tr><td class="c">${i + 1}</td><td>${esc(r.loc)}</td>${artCells(r, t)}</tr>`).join('') +
+    `</tbody><tfoot><tr><td colspan="2">Total Area South</td>${artCells(T, t)}</tr></tfoot>`;
+  $('aBrand').innerHTML = artHead(['#', 'Brand']) + '<tbody>' +
+    (A.brand.length ? A.brand.map((r, i) => `<tr><td class="c">${i + 1}</td><td class="b">${esc(r.brand)}</td>${artCells(r, t)}</tr>`).join('') : '<tr><td colspan="9" class="c">ไม่มีข้อมูล</td></tr>') + '</tbody>';
+  const many = A.model.length > MODEL_TOP, TM = ART_ALL_MODELS ? { rows: A.model, other: null } : topArtModels(A.model, MODEL_TOP);
+  $('aHModel').textContent = many && !ART_ALL_MODELS ? `By Model (Top ${MODEL_TOP} by Device)` : 'By Model';
+  $('aModel').innerHTML = artHead(['#', 'Brand', 'Model']) + '<tbody>' +
+    (TM.rows.length ? TM.rows.map((r, i) => `<tr><td class="c">${i + 1}</td><td>${esc(r.brand)}</td><td class="b">${esc(r.model)}</td>${artCells(r, t)}</tr>`).join('') : '<tr><td colspan="10" class="c">ไม่มีข้อมูล</td></tr>') +
+    (TM.other ? `<tr class="oth"><td colspan="3">${esc(TM.other.model)}</td>${artCells(TM.other, t)}</tr>` : '') + '</tbody>';
+  $('aMore').hidden = !many;
+  $('aMore').textContent = ART_ALL_MODELS ? `แสดงเฉพาะ Top ${MODEL_TOP}` : `แสดงทั้งหมด ${A.model.length} รุ่น`;
+  const focus = $('aFocus').checked, st = A.staff.map((r, i) => [r, i]).filter(([r]) => !focus || (r.art != null && r.art < t));
+  $('aStaff').innerHTML = artHead(['#', 'Username', 'Location']) + '<tbody>' +
+    (st.length ? st.map(([r, i]) => `<tr><td class="c">${i + 1}</td><td class="b">${esc(r.Username)}</td><td>${esc(r.loc)}</td>${artCells(r, t)}</tr>`).join('')
+      : '<tr><td colspan="10" class="c">ไม่มีข้อมูล</td></tr>') + '</tbody>';
+  const w = [];
+  if (!PARSED) w.push('ยังไม่มีไฟล์ Care Plus — %ART จะเป็น 0%');
+  else {
+    w.push(...cpWarnings(PARSED).filter(x => /อ่านวันที่ไม่ได้|เดือน\/วัน/.test(x)));
+    if (A.noCp) w.push('ไฟล์ Care Plus ไม่มีข้อมูลของช่วงวันที่ที่เลือก — Care Plus ที่โหลดไว้มีวันที่: ' + (PARSED.dates.length ? dateLabel(PARSED.dates.slice()) : 'ไม่พบวันที่'));
+  }
+  if (!DEVICE) w.push('ยังไม่มีไฟล์ Device Sale — คำนวณ %ART ไม่ได้');
+  else if (A.noDv) w.push('ไฟล์ Device Sale ไม่มีข้อมูลของช่วงวันที่ที่เลือก');
+  if (DEVICE && DEVICE.outside) w.push(`Device: ตัดออก ${fmt(DEVICE.outside)} แถว (สาขานอกความดูแล)`);
+  if (DEVICE && Object.keys(DEVICE.excluded).length) w.push('Device: ไม่นับแบรนด์ที่ไม่ใช่ Device (ทั้งไฟล์) — ' + Object.entries(DEVICE.excluded).map(([k, v]) => `${esc(k)} ${fmt(v)}`).join(', '));
+  if (DEVICE && A.dvRecs.length) {
+    const m0 = A.dvRecs[0].d ? A.dvRecs[0].d.y * 100 + A.dvRecs[0].d.m : 0;
+    const old = DEVICE.recs.filter(x => x.d && x.d.y * 100 + x.d.m < m0).length;
+    if (old) w.push(`Device: ไม่นับ ${fmt(old)} แถวที่เป็นวันที่ของเดือนก่อน`);
+  }
+  if (PARSED && A.mtd) {
+    const cpD = new Set(A.cpRecs.map(x => x.dk)), dvD = new Set(A.dvRecs.map(x => x.dk));
+    const miss = [...dvD].filter(k => !cpD.has(k)).sort();
+    if (miss.length) w.push('Care Plus ยังขาดวันที่: ' + miss.map(k => String(k % 100).padStart(2, '0')).join(', ') + ' (มี Device แต่ไม่มี Care Plus — %ART จะต่ำกว่าจริง ให้เพิ่มไฟล์ Care Plus ของวันนั้น)');
+  }
+  $('artWarn').innerHTML = w.join('<br>'); $('artWarn').hidden = !w.length;
+  $('artResult').hidden = false;
+}
+function artSel() {
+  const v = $('artDate').value;
+  if (v.startsWith('m')) { const n = +v.slice(1); return { month: { y: Math.floor(n / 100), m: n % 100 } }; }
+  return { dk: +v };
+}
+function refreshArt(keepSel) {
+  if (!PARSED && !DEVICE) { ART = null; $('artResult').hidden = true; return; }
+  const prev = $('artDate').value;
+  const all = {}; [...(PARSED ? PARSED.dates : []), ...(DEVICE ? DEVICE.dates : [])].forEach(d => all[dKey(d)] = d);
+  // only the latest month (stray back-dated rows from last month are ignored)
+  const allKeys = Object.keys(all).map(Number).sort((a, b) => b - a);
+  const latestM = allKeys.length ? Math.floor(allKeys[0] / 100) : 0;
+  const keys = allKeys.filter(k => Math.floor(k / 100) === latestM);
+  const months = latestM ? [latestM] : [];
+  const cpSet = new Set((PARSED ? PARSED.dates : []).map(dKey)), dvSet = new Set((DEVICE ? DEVICE.dates : []).map(dKey));
+  $('artDate').innerHTML = months.map(m => `<option value="m${m}">MTD ${MONTHS[m % 100 - 1]} ${Math.floor(m / 100)}</option>`).join('') +
+    keys.map(k => `<option value="${k}">${dTxt(all[k])}${cpSet.has(k) && dvSet.has(k) ? '' : cpSet.has(k) ? ' (Care Plus เท่านั้น)' : ' (Device เท่านั้น)'}</option>`).join('');
+  const both = keys.find(k => cpSet.has(k) && dvSet.has(k));
+  if (keepSel && [...$('artDate').options].some(o => o.value === prev)) $('artDate').value = prev;
+  else $('artDate').value = both ? String(both) : (keys.length ? String(keys[0]) : '');
+  computeArt();
+}
+function computeArt() {
+  if (!$('artDate').value) { ART = null; $('artResult').hidden = true; return; }
+  ART = aggregateArt(PARSED, DEVICE, artSel()); renderArt();
+}
+
+/* ---------- file loading (auto-detect Care Plus / Device) ---------- */
+function readBuf(file) {
+  return new Promise((res, rej) => { const r = new FileReader(); r.onload = e => res(new Uint8Array(e.target.result)); r.onerror = () => rej(new Error('อ่านไฟล์ไม่สำเร็จ: ' + file.name)); r.readAsArrayBuffer(file); });
+}
+async function loadOne(file) {
+  const buf = await readBuf(file);
+  if (/\.csv$/i.test(file.name)) {
+    let text; try { text = new TextDecoder('utf-8', { fatal: true }).decode(buf); } catch (_) { text = new TextDecoder('windows-874').decode(buf); }
+    const wb = XLSX.read(text, { type: 'string', raw: true });
+    return { kind: 'cp', parsed: parseRows(XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { header: 1, raw: true, defval: '' })) };
+  }
+  // Device file: read only Data_Sale when present (the ROS workbook is large)
+  let wb = XLSX.read(buf, { type: 'array', cellDates: false, sheets: ['Data_Sale', 'Target'] });
+  if (!wb.Sheets.Data_Sale) wb = XLSX.read(buf, { type: 'array', cellDates: false });
+  let extra = {};
+  if (wb.Sheets.Target) {   // PARTNER CODE → USER, used when a sale row has only the numeric code
+    const tr = XLSX.utils.sheet_to_json(wb.Sheets.Target, { header: 1, raw: true, defval: '' });
+    const h = (tr[0] || []).map(x => String(x).trim().toLowerCase()), pc = h.indexOf('partner code'), us = h.indexOf('user');
+    if (pc >= 0 && us >= 0) tr.slice(1).forEach(r => { if (r[pc] && r[us]) extra[String(r[pc]).trim()] = String(r[us]).trim().toUpperCase(); });
+  }
+  for (const n of wb.SheetNames) {
+    if (n === 'Target') continue;
+    const rows = XLSX.utils.sheet_to_json(wb.Sheets[n], { header: 1, raw: true, defval: '' });
+    if (rows.slice(0, 20).some(isDeviceHeader)) return { kind: 'dv', parsed: parseDevice(rows, extra) };
+  }
+  const rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { header: 1, raw: true, defval: '' });
+  return { kind: 'cp', parsed: parseRows(rows) };
+}
+async function handleFiles(files) {
+  $('err').hidden = true;
+  const errs = [];
+  for (const f of files) {
+    try {
+      const r = await loadOne(f);
+      if (r.kind === 'dv') { DEVICE = r.parsed; DEVICE_NAME = f.name; }
+      else { r.parsed.name = f.name; CP_FILES = CP_FILES.filter(x => x.name !== f.name); CP_FILES.push(r.parsed); }
+    } catch (ex) { errs.push(f.name + ': ' + (ex.message || 'อ่านไฟล์ไม่สำเร็จ')); }
+  }
+  if (errs.length) showError(errs.join(' · '));
+  afterLoad();
+}
+function afterLoad() {
+  PARSED = mergeCp(CP_FILES);
+  renderChips();
+  if (PARSED) fillDates(); else { DATA = null; $('result').hidden = true; }
+  refreshArt(true);
+}
+function renderChips() {
+  const rng = ds => ds.length ? dateLabel(ds.slice()) : 'ไม่พบวันที่';
+  const cp = CP_FILES.map((p, i) => `<span class="chip${p.dates.length ? '' : ' bad'}">📄 ${esc(p.name)} <small>${rng(p.dates)} · ${fmt(p.recs.length)} orders</small><button type="button" data-rm="cp" data-i="${i}" aria-label="ลบไฟล์ ${esc(p.name)}">×</button></span>`).join('');
+  const dv = DEVICE ? `<span class="chip">📦 ${esc(DEVICE_NAME)} <small>${rng(DEVICE.dates.filter(d => d.y * 100 + d.m === Math.max(...DEVICE.dates.map(x => x.y * 100 + x.m))))} · ${fmt(DEVICE.recs.length)} devices</small><button type="button" data-rm="dv" aria-label="ลบไฟล์ Device">×</button></span>` : '';
+  document.querySelectorAll('[data-chips=cp]').forEach(el => el.innerHTML = cp);
+  document.querySelectorAll('[data-chips=dv]').forEach(el => el.innerHTML = dv);
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-rm]'); if (!b) return;
+  if (b.dataset.rm === 'dv') { DEVICE = null; DEVICE_NAME = ''; } else CP_FILES.splice(+b.dataset.i, 1);
+  afterLoad();
+});
+document.querySelectorAll('.drop').forEach(drop => {
+  const inp = drop.querySelector('input');
+  inp.addEventListener('change', e => { handleFiles([...e.target.files]); e.target.value = ''; });
+  drop.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); inp.click(); } });
+  ['dragenter', 'dragover'].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.add('over'); }));
+  ['dragleave', 'drop'].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.remove('over'); }));
+  drop.addEventListener('drop', e => handleFiles([...e.dataTransfer.files]));
+});
+
+/* ---------- buttons ---------- */
+function download(blob, name) {
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
+  document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+}
+$('dateSel').addEventListener('change', e => setDate(+e.target.value));
+$('btnMore').addEventListener('click', () => { SHOW_ALL_MODELS = !SHOW_ALL_MODELS; if (DATA) renderModels(DATA); });
+$('btnClear').addEventListener('click', () => { CP_FILES = []; DEVICE = null; DEVICE_NAME = ''; $('err').hidden = true; afterLoad(); });
+$('btnXlsx').addEventListener('click', () => {
+  if (!DATA) return;
+  try { XLSX.writeFile(buildXlsx(DATA), `Care_Plus_${DATA.mtd ? 'MTD' : 'Daily'}_Performance_${DATA.fileDate}.xlsx`); }
+  catch (ex) { showError('Export Excel ไม่สำเร็จ: ' + ex.message); }
+});
+$('btnExport').addEventListener('click', async () => {
+  if (!DATA) return;
+  const b = $('btnExport'); b.disabled = true; b.textContent = 'กำลังสร้างไฟล์…';
+  try { await buildPptx(DATA).writeFile({ fileName: `Care_Plus_${DATA.mtd ? 'MTD' : 'Daily'}_Performance_${DATA.fileDate}.pptx` }); }
+  catch (ex) { showError('Export ไม่สำเร็จ: ' + ex.message); }
+  finally { b.disabled = false; b.textContent = 'Export PowerPoint'; }
+});
+$('artDate').addEventListener('change', computeArt);
+$('artTarget').addEventListener('input', renderArt);
+$('aFocus').addEventListener('change', renderArt);
+$('aMore').addEventListener('click', () => { ART_ALL_MODELS = !ART_ALL_MODELS; renderArt(); });
+const artName = ext => `ART_CarePlus_vs_Device_${ART.mtd ? 'MTD' : 'Daily'}_${ART.fileDate}.${ext}`;
+$('btnArtPptx').addEventListener('click', async () => {
+  if (!ART) return;
+  const b = $('btnArtPptx'); b.disabled = true; b.textContent = 'กำลังสร้างไฟล์…';
+  try { await buildArtPptx(ART, artTarget()).writeFile({ fileName: artName('pptx') }); }
+  catch (ex) { showError('Export ไม่สำเร็จ: ' + ex.message); }
+  finally { b.disabled = false; b.textContent = 'Export PowerPoint'; }
+});
+$('btnArtXlsx').addEventListener('click', async () => {
+  if (!ART) return;
+  const b = $('btnArtXlsx'); b.disabled = true; b.textContent = 'กำลังสร้างไฟล์…';
+  try {
+    const wb = await buildArtXlsx(ART, artTarget());
+    download(new Blob([await wb.xlsx.writeBuffer()], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), artName('xlsx'));
+  } catch (ex) { showError('Export Excel ไม่สำเร็จ: ' + ex.message); }
+  finally { b.disabled = false; b.textContent = 'Export Excel'; }
+});
+</script>
+</body>
+</html>
